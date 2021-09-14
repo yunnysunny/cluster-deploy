@@ -1,0 +1,10 @@
+{
+    "node_name": "consul-client",
+    "data_dir": "/consul/data",
+    "retry_join":[
+        "consul-server-dc1-1",
+        "consul-server-dc1-2",
+        "consul-server-dc1-3"
+     ],
+    "encrypt": "aPuGh+5UDskRAbkLaXRzFoSOcSM+5vAK+NEYOWHJH7w="
+}
