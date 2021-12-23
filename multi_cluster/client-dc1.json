@@ -1,6 +1,11 @@
 {
-    "node_name": "consul-client",
+    "node_name": "consul-client-dc1",
     "data_dir": "/consul/data",
+    "datacenter": "dc1",
+    "addresses": {
+        "http" : "0.0.0.0"
+    },
+    "client_addr": "0.0.0.0",
     "retry_join":[
         "consul-server-dc1-1",
         "consul-server-dc1-2",

@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  
+
   consul-server-dc1-1:
     image: hashicorp/consul:1.10
     container_name: consul-server-dc1-1
@@ -64,16 +64,77 @@ services:
     networks:
       - consul
     command: "agent -bootstrap-expect=3"
-  consul-client:
+  consul-client-dc1:
     image: hashicorp/consul:1.10
-    container_name: consul-client
+    container_name: consul-client-dc1
     restart: always
+    depends_on:
+      - consul-server-dc1-1
+      - consul-server-dc1-2
+      - consul-server-dc1-3
     volumes:
-     - ./client.json:/consul/config/client.json:ro
+     - ./client-dc1.json:/consul/config/client.json:ro
     networks:
       - consul
     command: "agent"
-
+    ports:
+      - "8501:8500"
+  consul-client-dc2:
+    image: hashicorp/consul:1.10
+    container_name: consul-client-dc2
+    restart: always
+    depends_on:
+      - consul-server-dc2-1
+      - consul-server-dc2-2
+      - consul-server-dc2-3
+    volumes:
+     - ./client-dc2.json:/consul/config/client.json:ro
+    networks:
+      - consul
+    command: "agent"
+    ports:
+      - "8502:8500"
+  restygate:
+    image: registry.cn-hangzhou.aliyuncs.com/whyun/base:restygate-latest
+    container_name: restygate
+    restart: always
+    depends_on:
+      - consul-server-dc1-1
+      - consul-server-dc1-2
+      - consul-server-dc1-3
+    networks:
+      - consul
+    ports:
+      - "8800:80"
+  webapp-dc1:
+    image: registry.cn-hangzhou.aliyuncs.com/whyun/base:hello-service-latest
+    container_name: webapp-dc1
+    depends_on:
+      - consul-client-dc1
+    environment:
+      CONSUL_ADDR: consul-client-dc1:8500
+      APP_PORT: 8000
+      REGISTERED_HTTP_SERVICE_PORT: 8000
+      DEREGISTER_CRITICAL_SERVICE_AFTER_SECONDS: 10
+    networks:
+      - consul
+    ports:
+      - "8000:8000"
+  webapp-dc2:
+    image: registry.cn-hangzhou.aliyuncs.com/whyun/base:hello-service-latest
+    container_name: webapp-dc2
+    depends_on:
+      - consul-client-dc2
+    environment:
+      CONSUL_ADDR: consul-client-dc2:8500
+      APP_PORT: 8001
+      REGISTERED_HTTP_SERVICE_PORT: 8001
+      DEREGISTER_CRITICAL_SERVICE_AFTER_SECONDS: 10
+    networks:
+      - consul
+    ports:
+      - "8001:8001"
+  
 networks:
   consul:
     driver: bridge

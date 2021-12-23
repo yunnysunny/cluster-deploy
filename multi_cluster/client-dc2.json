@@ -1,20 +1,15 @@
 {
-    "node_name": "consul-server-dc1-1",
-    "server": true,
-    "datacenter": "dc1",
-    "ui_config": {
-        "enabled" : true
-    },
+    "node_name": "consul-client-dc2",
     "data_dir": "/consul/data",
+    "datacenter": "dc2",
+    "addresses": {
+        "http" : "0.0.0.0"
+    },
     "client_addr": "0.0.0.0",
     "retry_join":[
-        "consul-server-dc1-2",
-        "consul-server-dc1-3"
-    ],
-    "retry_join_wan":[
         "consul-server-dc2-1",
         "consul-server-dc2-2",
         "consul-server-dc2-3"
-    ],
+     ],
     "encrypt": "aPuGh+5UDskRAbkLaXRzFoSOcSM+5vAK+NEYOWHJH7w="
 }

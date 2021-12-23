@@ -60,7 +60,7 @@ networks:
 
 **代码 1.1**
 
-command 参数中没有写 consul 关键字，是由于 hashicorp/consul 镜像中会自动给补充上参数，具体可以参见其[启动脚本](https://github.com/hashicorp/docker-consul/blob/master/ubi/docker-entrypoint.sh)。如果 command 的首个单词为 agent ，则会自动在执行的命令中补充 --data-dir 参数（默认为 /consul/data/ 目录）和 --config-dir 参数（默认为 /consul/config 目录）。bootstrap-expect 参数设置为 3 代表当前集群中 3 台服务器端 consul 都启动完成，才能算是集群启动成功。
+command 参数中没有写 `consul` 关键字，是由于 `hashicorp/consul` 镜像中会自动给补充上参数，具体可以参见其[启动脚本](https://github.com/hashicorp/docker-consul/blob/master/ubi/docker-entrypoint.sh)。如果 command 的首个单词为 `agent` ，则会自动在执行的命令中补充 `--data-dir` 参数（默认为 `/consul/data/` 目录）和 `--config-dir` 参数（默认为 `/consul/config` 目录）。`bootstrap-expect` 参数设置为 `3` 代表当前集群中 `3` 台服务器端 consul 都启动完成，才能算是集群启动成功。
 
 所有的 consul 节点都指定了配置文件，先看 server 节点 server-dc1-1.json 文件：
 
@@ -85,9 +85,9 @@ command 参数中没有写 consul 关键字，是由于 hashicorp/consul 镜像�
 
 **代码 1.2**
 
-server 属性设置为 true 代表当前是服务节点，retry_join 要写集群中其他节点的地址（这里借助了 docker-compose 的内网主机名来代替 ip 地址）。encrypt 属性的值是通过 `consul keygen` 命令生成的。
+`server` 属性设置为 `true` 代表当前是服务节点，`retry_join` 要写集群中其他节点的地址（这里借助了 docker-compose 的内网主机名来代替 ip 地址）。`encrypt` 属性的值是通过 `consul keygen` 命令生成的。
 
-server-dc1-2.json 和 server-dc1-3.json 和 server-dc1-1.json 不同的地方，在于 node_name 不同，retry_join 的主机名不同不同，且前两者没有配置 ui_config 属性。
+server-dc1-2.json 和 server-dc1-3.json 和 server-dc1-1.json 不同的地方，在于 `node_name` 不同，`retry_join` 的主机名不同不同，且前两者没有配置 `ui_config` 属性。
 
 通过在 docker-compose.yml 文件所在目录运行 `docker-compose up -d` 命令后，就启动了一个 consul 数据中心，打开浏览器 http://localhost:8500 即可通过管理界面验证是否启动成功。
 
@@ -206,7 +206,7 @@ networks:
 
 **代码 2.2**
 
-这里增加了两个配置 datacenter 和 retry_join_wan，前者是数据中心的名字，后者是要加入的其他数据中心的节点主机名。
+这里增加了两个配置 `datacenter` 和 `retry_join_wan`，前者是数据中心的名字，后者是要加入的其他数据中心的节点主机名。
 
 同样通过 `docker-compose up -d` 启动集群，再次查看 http://localhost:8500，会发现多了一个数据中心。
 

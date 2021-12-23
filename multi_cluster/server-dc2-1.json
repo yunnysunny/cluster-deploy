@@ -6,9 +6,7 @@
         "enabled" : true
     },
     "data_dir": "/consul/data",
-    "addresses": {
-        "http" : "0.0.0.0"
-    },
+    "client_addr": "0.0.0.0",
     "retry_join":[
         "consul-server-dc2-2",
         "consul-server-dc2-3"
