@@ -275,5 +275,7 @@ networks:
 
 consul 配置参数说明 https://www.consul.io/docs/agent/options
 
+镜像 registry.cn-hangzhou.aliyuncs.com/whyun/base:hello-service-latest 的 dockerfile 参见[这里](https://github.com/yunnysunny/dockerfiles/blob/master/hello/hello-service.Dockerfile) 。
+
 
 
