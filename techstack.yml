@@ -1,0 +1,45 @@
+repo_name: yunnysunny/cluster-deploy
+report_id: 7b02b14aa610fe1b3e0ebc6fd4c19812
+version: 0.1
+repo_type: Public
+timestamp: '2024-02-29T19:54:53+00:00'
+requested_by: yunnysunny
+provider: github
+branch: main
+detected_tools_count: 3
+tools:
+- name: Consul
+  description: A tool for service discovery, monitoring and configuration
+  website_url: http://www.consul.io/
+  license: MPL-2.0
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Open Source Service Discovery
+  image_url: https://img.stackshare.io/service/747/consul-logo-grad_teaser.png
+  detection_source_url: https://github.com/yunnysunny/cluster-deploy/blob/main/multi_cluster/docker-compose.yml
+  detection_source: multi_cluster/docker-compose.yml
+  last_updated_by: yunnysunny
+  last_updated_on: 2021-12-23 09:17:33.000000000 Z
+- name: Git
+  description: Fast, scalable, distributed revision control system
+  website_url: http://git-scm.com/
+  open_source: true
+  hosted_saas: false
+  category: Build, Test, Deploy
+  sub_category: Version Control System
+  image_url: https://img.stackshare.io/service/1046/git.png
+  detection_source_url: https://github.com/yunnysunny/cluster-deploy
+  detection_source: Repo Metadata
+- name: Base
+  description: All-in-one sales and customer management platform
+  website_url: https://getbase.com/
+  open_source: false
+  hosted_saas: false
+  category: Support, Sales, and Marketing
+  sub_category: CRM
+  image_url: https://img.stackshare.io/service/3633/ZBMmmvP1_400x400.jpg
+  detection_source_url: https://github.com/yunnysunny/cluster-deploy/blob/main/multi_cluster/docker-compose.yml
+  detection_source: multi_cluster/docker-compose.yml
+  last_updated_by: yunnysunny
+  last_updated_on: 2021-09-14 12:27:36.000000000 Z
